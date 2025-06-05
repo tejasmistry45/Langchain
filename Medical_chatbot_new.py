@@ -22,20 +22,20 @@ memory = SqliteSaver(sqlite_conn)
 # Initialize LLM 
 llm = ChatGroq(model="llama-3.1-8b-instant")
 
-# === Initialize Tavily tool ===
+# Initialize Tavily tool
 tavily_tool = TavilySearchResults(max_results=3)
 
-# === Tool list ===
+# Tool list
 tools = [tavily_tool]
 
-# === Create agent ===
+# Create agent
 agent = create_react_agent(model=llm, tools=tools)
 
-# === State definition ===
+# State definition
 class AgentState(TypedDict):
     messages: Annotated[list, add_messages]
 
-# === Graph ===
+# Graph
 graph = StateGraph(AgentState)
 graph.add_node("agent", agent)
 graph.set_entry_point("agent")
@@ -43,7 +43,6 @@ graph.add_edge("agent", END)
 
 app = graph.compile(checkpointer=memory)
 
-# === Chat loop ===
 config = RunnableConfig(configurable={"thread_id": "1"})
 
 print("\n💬 Medical Agent: Enter your medical query (type 'exit' or 'end' to quit)")
