@@ -1,4 +1,3 @@
-import os
 import sqlite3
 from dotenv import load_dotenv
 from datetime import datetime
@@ -27,25 +26,7 @@ llm = ChatGroq(model="llama-3.1-8b-instant")
 # Tavily web search tool
 tavily_tool = TavilySearchResults(max_results=3)
 
-@tool
-def search_with_citations(query: str) -> str:
-    """Searches the web and returns useful answers with citations."""
-    results = tavily_tool.invoke({"query": query})
-    if not results or not isinstance(results, list):
-        return "No relevant results found."
-
-    answer = results[0].get("content", "No content available.")
-    citations = []
-    for i, result in enumerate(results, 1):
-        title = result.get("title", "Untitled")
-        url = result.get("url", "")
-        citations.append(f"[{i}] {title} - {url}")
-
-    citation_block = "\n\nSources:\n" + "\n".join(citations)
-    return f"{answer}{citation_block}"
-
-# Optional: Add more tools in future
-tools = [search_with_citations]
+tools = [tavily_tool]
 
 # ReAct agent (LLM decides whether to use a tool)
 agent = create_react_agent(model=llm, tools=tools)
