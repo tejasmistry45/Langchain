@@ -24,7 +24,7 @@ tavily_search_tool = TavilySearchResults(max_results=3)
 
 tools = [tavily_search_tool]
 
-# ReAct agent (LLM decides whether to use a tool)
+# ReAct agent 
 agent = create_react_agent(model=llm, tools=tools)
 
 # define conversation state
@@ -35,7 +35,7 @@ class AgentState(TypedDict):
 graph = StateGraph(AgentState)
 
 graph.add_node("agent", agent)
-graph .set_entry_point("agent")
+graph.set_entry_point("agent")
 graph.add_edge("agent", END)
 
 # compile graph
