@@ -5,3 +5,14 @@ python-dotenv
 langchain-groq
 langgraph
 langgraph-checkpoint-sqlite
+guardrails-ai
+pandas
+numpy
+wikipedia
+
+
+
+# use python 3.10 version for guardrails-ai
+
+# guardrails-ai api key : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnb29nbGUtb2F1dGgyfDEwODQwMzQyNjA0NTgwMDg0NTU0MiIsImFwaUtleUlkIjoiOTZiNGQyZTMtMzNhZi00MjE3LTgzMTEtY2E3ZjI3YzcxZjNmIiwic2NvcGUiOiJyZWFkOnBhY2thZ2VzIiwicGVybWlzc2lvbnMiOltdLCJpYXQiOjE3NDkyMTA1OTUsImV4cCI6NDkwMjgxMDU5NX0.x11udEPwy41jtqC-Atu0ha9HegIlRdtAyebXAGUP0nE"
+

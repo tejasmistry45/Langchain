@@ -20,12 +20,12 @@ sqlite_conn = sqlite3.connect("Database/medical_chatbot.sqlite", check_same_thre
 memory = SqliteSaver(sqlite_conn)
 
 # LLM
-llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.1)
+llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0.7)
 
 # Search tool
 tavily_tool = TavilySearchResults(max_results=3)
 
-# --- Tool Definitions ---
+# Tool Definitions
 @tool
 def get_current_datetime(dummy: str = "") -> str:
     """Returns the current date and time. Input can be anything (not used)."""
@@ -159,7 +159,11 @@ Current iteration: {state["iteration"] + 1}/{self.max_iterations}
         
         # Get LLM response
         response = self.llm.invoke([SystemMessage(content=react_prompt)])
+
+        print("=" * 60)
+        print("Raw Response: ", response)
         response_text = response.content
+        # print("Raw LLM Response: ", response_text)
         
         print(f"\n🧠 Iteration {state['iteration'] + 1}:")
         print(f"LLM Response:\n{response_text}")
@@ -317,16 +321,16 @@ def run_medical_react_agent(user_input: str) -> str:
     final_state = app.invoke(initial_state, config=config)
     
     print("\n" + "=" * 60)
-    print("📋 REACT PROCESS SUMMARY:")
-    print("=" * 60)
+    # print("📋 REACT PROCESS SUMMARY:")
+    # print("=" * 60)
     
-    # Show the ReAct process summary
-    for i, step in enumerate(final_state["history"], 1):
-        print(f"\n🔄 ITERATION {i}:")
-        print(f"💭 Thought: {step['thought']}")
-        print(f"🛠️  Action: {step['action']}")
-        print(f"📝 Action Input: {step['action_input']}")
-        print(f"👁️  Observation: {step['observation'][:200]}..." if len(step['observation']) > 200 else f"👁️  Observation: {step['observation']}")
+    # # Show the ReAct process summary
+    # for i, step in enumerate(final_state["history"], 1):
+    #     print(f"\n🔄 ITERATION {i}:")
+    #     print(f"💭 Thought: {step['thought']}")
+    #     print(f"🛠️  Action: {step['action']}")
+    #     print(f"📝 Action Input: {step['action_input']}")
+    #     print(f"👁️  Observation: {step['observation'][:200]}..." if len(step['observation']) > 200 else f"👁️  Observation: {step['observation']}")
     
     print(f"\n🎯 FINAL ANSWER:")
     print("=" * 60)
