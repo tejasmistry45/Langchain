@@ -1,6 +1,9 @@
 .venv/
 .env
 Database/
+cot_sc_app/
 
+
+08_cotcs.py
 
 demo_chatbot.sqlite

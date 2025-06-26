@@ -5,7 +5,7 @@ python-dotenv
 langchain-groq
 langgraph
 langgraph-checkpoint-sqlite
-guardrails-ai
+# guardrails-ai
 pandas
 numpy
 wikipedia
